@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6162" systemVersion="14A238h" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13D65" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="TV4-R1-N7P">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6160"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6153.11"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="ReactiveSwift" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -15,11 +15,97 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VUa-SD-3dd">
+                                <rect key="frame" x="118" y="123" width="245" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="245" id="WRt-bD-rWf"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tIE-v2-pyt">
+                                <rect key="frame" x="118" y="181" width="245" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Io4-Wb-qEt">
+                                <rect key="frame" x="320" y="243" width="43" height="30"/>
+                                <state key="normal" title="Log In">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please try again" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qXd-25-eTd">
+                                <rect key="frame" x="118" y="247" width="122" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="IqE-cE-C64"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="VUa-SD-3dd" firstAttribute="trailing" secondItem="tIE-v2-pyt" secondAttribute="trailing" id="5e9-Mp-YDF"/>
+                            <constraint firstItem="VUa-SD-3dd" firstAttribute="leading" secondItem="tIE-v2-pyt" secondAttribute="leading" id="BSL-er-gIU"/>
+                            <constraint firstItem="VUa-SD-3dd" firstAttribute="leading" secondItem="qXd-25-eTd" secondAttribute="leading" id="DX2-fW-ule"/>
+                            <constraint firstItem="qXd-25-eTd" firstAttribute="baseline" secondItem="Io4-Wb-qEt" secondAttribute="baseline" id="NtR-lt-oUL"/>
+                            <constraint firstItem="VUa-SD-3dd" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Uoy-VQ-zTd"/>
+                            <constraint firstItem="VUa-SD-3dd" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="59" id="fU7-WD-G9L"/>
+                            <constraint firstItem="qXd-25-eTd" firstAttribute="top" secondItem="tIE-v2-pyt" secondAttribute="bottom" constant="36" id="hpF-Yp-IXc"/>
+                            <constraint firstItem="tIE-v2-pyt" firstAttribute="top" secondItem="VUa-SD-3dd" secondAttribute="bottom" constant="28" id="l9o-xZ-T6M"/>
+                            <constraint firstItem="VUa-SD-3dd" firstAttribute="trailing" secondItem="Io4-Wb-qEt" secondAttribute="trailing" id="rif-zi-NOD"/>
+                        </constraints>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
+                    <navigationItem key="navigationItem" id="4DC-TF-8ME"/>
+                    <connections>
+                        <outlet property="loginButton" destination="Io4-Wb-qEt" id="3CH-gF-lDO"/>
+                        <outlet property="passwordField" destination="tIE-v2-pyt" id="70N-b5-9ZV"/>
+                        <outlet property="signInFailureText" destination="qXd-25-eTd" id="bX0-R7-7UV"/>
+                        <outlet property="usernameField" destination="VUa-SD-3dd" id="N2N-Vw-jW0"/>
+                        <segue destination="zmd-wl-J7x" kind="show" identifier="signInSuccess" id="cxy-a1-oIh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="859" y="142"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="5gf-ta-FdL">
+            <objects>
+                <viewController id="zmd-wl-J7x" sceneMemberID="viewController">
+                    <imageView key="view" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="kitten.jpg" id="Zcm-pi-ohY">
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    </imageView>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XJR-r1-iPk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1381" y="142"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="2mY-bW-EeY">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="TV4-R1-N7P" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="LgO-kE-pnf">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="j1h-nf-38K"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lo2-QL-Czj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="300" y="678"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="kitten.jpg" width="537" height="740"/>
+    </resources>
 </document>

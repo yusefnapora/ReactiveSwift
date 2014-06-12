@@ -7,3 +7,10 @@
 //
 
 import Foundation
+
+class DummySignInService {
+    func signIn(username: String, password: String, complete: (Bool) -> Void) {
+        let success = (username == "username" && password == "password")
+        complete(success)
+    }
+}
