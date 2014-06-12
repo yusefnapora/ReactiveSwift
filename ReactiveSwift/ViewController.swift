@@ -28,7 +28,8 @@ class ViewController: UIViewController {
         // note that isValidPassword has to accept AnyObject! and return an AnyObject compatible type
         var validPasswordSignal = passwordField.rac_textSignal().map(isValidPassword)
 
-        // Here we're using our swift version of the 'RAC' macro.
+        // Here we're using our swift version of the 'RAC' macro. (see RAC.swift)
+        //
         // Using the custom operators '<~' and '~>', we can have the signal
         // on either side of the RAC construct.  Both of the following statements
         // wire up a signal to the 'backgroundColor' property of a UITextField
@@ -45,7 +46,8 @@ class ViewController: UIViewController {
         // could be assigned a block with any number of parameters, so long as it returns id
         //
         // ReactiveCocoa exploits this to provide a limited form of dynamic blocks.  If a signal's value is an RACTuple,
-        // it will invoke the block with the number of arguments corresponding to the number of values in the tuple.
+        // it will invoke the block with the number of arguments corresponding to the number of values in the tuple
+        // (up to a maximum of fifteen).
         //
         // Swift is much more strict, and won't let you pass in a closure with arguments to a method expecting
         // a block with zero arguments.
@@ -56,15 +58,40 @@ class ViewController: UIViewController {
         // casting tuple.allObjects() to a Bool[] and then reducing it using a very simple reducer that just
         // returns the logical AND of the two arguments.
         //
-        // In a way this is more flexible, in that you can change the number of arguments to combineLatest: without
-        // changing the implementation of the reduce closure.  However, it's also *less* flexible, in that all the
-        // signals values must have the same type if you want to use Swift's reduce() function.
-        // If you had signals of different value types, you could still unpack the RACTuple into its constituent values
-        // by hand and apply your own logic.
-        //
-        let signupActiveSignal =  RACSignal.combineLatest([validUsernameSignal, validPasswordSignal]).AND()
         
+        let signupActiveSignal =  RACSignal.combineLatest([validUsernameSignal, validPasswordSignal]).map {
+            let tuple = $0 as RACTuple
+            let bools = tuple.allObjects() as Bool[]
+            return bools.reduce(true) {$0 && $1}
+        }
         signupActiveSignal ~> RAC(self.loginButton, "enabled")
+        
+        #if false
+            // If your signals contain values of different types, you'll need to unpack the RACTuple yourself
+            // Note that this won't compile if you remove the #if fence, since we're using undeclared identifiers
+            // 'thisSignalHasABool' and 'thisOneHasAString'
+            RACSignal.combineLatest([thisSignalHasABool, thisOneHasAString]).map {
+                let tuple = $0 as RACTuple
+                let boolVal = tuple.first() as Bool
+                let strVal = tuple.second() as String
+            
+                // do something with boolVal and strVal
+            }
+        #endif
+        
+        #if false
+            // For this simple case where we just want the logical AND of a set of NSNumber containing signals,
+            // we can just use the built-in AND method on RACSignal instead of a reducer.
+            // Still, I spent a good couple hours trying to get my head around the reduce block thing, so
+            // I wanted to keep the demonstration of reducing in Swift above.  Here's how to use the AND() method.
+            //
+            // Also, with our RAC construct now able to live on the right-hand side of the signal, we can add it to
+            // the end of a chain, like this:
+        RACSignal.combineLatest([validUsernameSignal, validPasswordSignal])
+            .AND()
+            ~> RAC(self.loginButton, "enabled")
+        #endif
+        
         
         loginButton.rac_signalForControlEvents(UIControlEvents.TouchUpInside)
             .doNext {
