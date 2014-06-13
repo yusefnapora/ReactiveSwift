@@ -22,11 +22,17 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         // we can map signals using the trailing closure syntax
-        var validUsernameSignal = usernameField.rac_textSignal().map { self.isValidUsername($0) }
+        var validUsernameSignal =
+            usernameField
+                .rac_textSignal()
+                .map { self.isValidUsername($0) }
         
         // or by passing the name of a function.
         // note that isValidPassword has to accept AnyObject! and return an AnyObject compatible type
-        var validPasswordSignal = passwordField.rac_textSignal().map(isValidPassword)
+        var validPasswordSignal =
+            passwordField
+                .rac_textSignal()
+                .map(isValidPassword)
 
         // Here we're using our swift version of the 'RAC' macro. (see RAC.swift)
         //
@@ -66,7 +72,7 @@ class ViewController: UIViewController {
         }
         signupActiveSignal ~> RAC(self.loginButton, "enabled")
         
-        #if false
+        #if DONT_COMPILE_ME_BRO
             // If your signals contain values of different types, you'll need to unpack the RACTuple yourself
             // Note that this won't compile if you remove the #if fence, since we're using undeclared identifiers
             // 'thisSignalHasABool' and 'thisOneHasAString'
@@ -79,7 +85,7 @@ class ViewController: UIViewController {
             }
         #endif
         
-        #if false
+        #if EASY_WAY
             // For this simple case where we just want the logical AND of a set of NSNumber containing signals,
             // we can just use the built-in AND method on RACSignal instead of a reducer.
             // Still, I spent a good couple hours trying to get my head around the reduce block thing, so
