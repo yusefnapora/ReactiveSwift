@@ -61,14 +61,15 @@ class ViewController: UIViewController {
         // However, swift does provide a reduce function on the Array type, and we can easily get an Array
         // representation of an RACTuple's values.
         // Here we're mapping the RACTuple returned by RACSignal.combineLatest() to a single Bool, by first
-        // casting tuple.allObjects() to a Bool[] and then reducing it using a very simple reducer that just
+        // casting tuple.allObjects() to a [Bool] and then reducing it using a very simple reducer that just
         // returns the logical AND of the two arguments.
         //
         
         let signupActiveSignal =  RACSignal.combineLatest([validUsernameSignal, validPasswordSignal]).map {
             let tuple = $0 as RACTuple
-            let bools = tuple.allObjects() as Bool[]
-            return bools.reduce(true) {$0 && $1}
+            let bools: [Bool] = tuple.allObjects() as [Bool]
+            let result: Bool = bools.reduce(true) {$0 && $1}
+            return result
         }
         signupActiveSignal ~> RAC(self.loginButton, "enabled")
         

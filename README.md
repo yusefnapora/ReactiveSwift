@@ -14,6 +14,7 @@ After cloning, you'll want to initialize the `ReactiveCocoa` submodule by doing:
 ```
 git submodule init
 git submodule update
+Run script/bootstrap from within the ReactiveCocoa folder
 ``` 
 
 This will check out [my fork][rc_fork] of ReactiveCocoa, which has a workaround for a Swift compiler error.

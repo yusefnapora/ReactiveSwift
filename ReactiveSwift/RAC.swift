@@ -32,14 +32,13 @@ extension NSObject {
 }
 
 
-operator infix <~ {}
-operator infix ~> {}
-
-@infix func <~ (rac: RAC, signal: RACSignal) {
+infix operator <~ {}
+func <~ (rac: RAC, signal: RACSignal) {
     rac.assignSignal(signal)
 }
 
-@infix func ~> (signal: RACSignal, rac: RAC) {
+infix operator ~> {}
+func ~> (signal: RACSignal, rac: RAC) {
     rac.assignSignal(signal)
 }
 
